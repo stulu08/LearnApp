@@ -1,0 +1,6 @@
+@LearnApp.Server_HostAddress = http://localhost:5145
+
+GET {{LearnApp.Server_HostAddress}}/get-user/
+Accept: application/json
+
+###
