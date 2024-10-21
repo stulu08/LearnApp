@@ -1,0 +1,9 @@
+<div class="{{grid ? 'grid' : ''}}" *ngIf="lessons">
+  <div class="m-3 sub-card col" *ngFor="let item of lessons">
+    <lesson-view [lesson]="item">
+    </lesson-view>
+  </div>
+  <div class="col-12 m-3 flex align-items-start" *ngIf="moreBtn && canLoadMore">
+    <button pButton class="p-4 text-xl font-bold p-button-outlined" (click)="moreBtnClick()">Show More</button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="main-card m-1 p-1">
+
+  <div class="flex justify-content-between flex-wrap sub-card m-3 p-2">
+
+    <div class="flex align-items-center justify-content-center p-field">
+      <input pInputText class="m-2 p-1 border-primary" [(ngModel)]="search" (keyup.enter)="searchBtnClick()">
+      <button pButton icon="pi pi-search" class="md:inline-flex" (click)="searchBtnClick()"></button>
+    </div>
+
+  </div>
+
+  <div class="m-2">
+    <lessons-list [grid]="true" [count]="12" [increment]="12" [moreBtn]="true" [search]="searchSubmitted"></lessons-list>
+  </div>
+</div>

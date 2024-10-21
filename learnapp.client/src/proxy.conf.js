@@ -5,9 +5,10 @@ const target = 'http://localhost:5145'
 const PROXY_CONFIG = [
   {
     context: [
-      "/user/get/*",
+      "/api/User/**",
+      "/api/Lesson/**",
     ],
-    target,
+    target: target,
     secure: false
   }
 ]

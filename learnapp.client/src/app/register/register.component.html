@@ -1,0 +1,127 @@
+
+<div class="card p-4 mt-3 pt-0 main-card MainForm text-center">
+	<p-toast />
+	<h2 class="font-bold text-4xl text-base m-4" [hidden]="!registerMode">Register as new user</h2>
+	<h2 class="font-bold text-4xl text-base m-4" [hidden]="registerMode">Login as existing user</h2>
+
+	<div class="grid p-fluid flex justify-content-center" [formGroup]="userForm">
+
+		<div class="col-12 sub-card p-3 m-1" [hidden]="!registerMode">
+			<div class="p-field ">
+				<h3 class="section-title">Display Name</h3>
+				<div>
+					<input pInputText id="display" formControlName="display" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('display')?.errors && userForm.get('display')?.touched"
+										 severity="error" [text]="getErrorMessage('display')" />
+				</div>
+			</div>
+		</div>
+
+		<div class="min-w-full md:min-w-max sub-card p-3 m-1" [class]="registerMode ? 'md:col sm:col-12 ' : 'col-12 '">
+			<h3 class="section-title">User Details</h3>
+
+			<div class="p-field ">
+				<label for="mail" class="p-col-4">E-Mail</label>
+				<div>
+					<input pInputText id="mail" type="email" formControlName="mail" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('mail')?.errors && userForm.get('mail')?.touched"
+										 severity="error" [text]="getErrorMessage('mail')" />
+				</div>
+			</div>
+			<div class="p-field ">
+				<label for="password" class="p-col-4">Password</label>
+				<div>
+					<input pInputText id="password" type="password" formControlName="password" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('password')?.errors && userForm.get('password')?.touched"
+										 severity="error" [text]="getErrorMessage('password')" />
+				</div>
+			</div>
+			<div [hidden]="!registerMode">
+				<div class="p-field ">
+					<label for="first" class="p-col-4">First Name</label>
+					<div>
+						<input pInputText id="first" formControlName="first" />
+					</div>
+					<div class="emsg">
+						<p-message *ngIf="userForm.get('first')?.errors && userForm.get('first')?.touched"
+											 severity="error" [text]="getErrorMessage('first')" />
+					</div>
+				</div>
+
+				<div class="p-field ">
+					<label for="last" class="p-col-4">Last Name</label>
+					<div>
+						<input pInputText id="last" formControlName="last" />
+					</div>
+					<div class="emsg">
+						<p-message *ngIf="userForm.get('last')?.errors && userForm.get('last')?.touched"
+											 severity="error" [text]="getErrorMessage('last')" />
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="md:col sm:col-12 min-w-full md:min-w-max sub-card p-3 m-1" [hidden]="!registerMode">
+			<h3 class="section-title">Address Details</h3>
+
+			<div class="p-field ">
+				<label for="street" class="p-col-4">Street</label>
+				<div>
+					<input pInputText id="street" formControlName="street" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('street')?.errors && userForm.get('street')?.touched"
+										 severity="error" [text]="getErrorMessage('street')" />
+				</div>
+			</div>
+
+			<div class="p-field ">
+				<label for="city" class="p-col-4">City</label>
+				<div>
+					<input pInputText id="city" formControlName="city" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('city')?.errors && userForm.get('city')?.touched"
+										 severity="error" [text]="getErrorMessage('city')" />
+				</div>
+			</div>
+
+			<div class="p-field ">
+				<label for="country" class="p-col-4">Country</label>
+				<div>
+					<input pInputText id="country" formControlName="country" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('country')?.errors && userForm.get('country')?.touched"
+										 severity="error" [text]="getErrorMessage('country')" />
+				</div>
+			</div>
+
+			<div class="p-field ">
+				<label for="postalCode" class="p-col-4">Postal Code</label>
+				<div>
+					<input pInputText id="postalCode" formControlName="postalCode" />
+				</div>
+				<div class="emsg">
+					<p-message *ngIf="userForm.get('postalCode')?.errors && userForm.get('postalCode')?.touched"
+										 severity="error" [text]="getErrorMessage('postalCode')" />
+				</div>
+			</div>
+		</div>
+
+		<div class="col-6 p-1">
+			<button pButton class="p-3 text-xl" [label]="registerMode ? 'Register' : 'Login'" icon="pi pi-user-plus" (click)="onSubmit()"></button>
+		</div>
+		<div class="col-6  p-1">
+			<button pButton class="p-3 text-xl" [label]="registerMode ? 'Login' : 'Register'" icon="pi pi-user-plus" (click)="onSwitch()"></button>
+		</div>
+	</div>
+
+</div>

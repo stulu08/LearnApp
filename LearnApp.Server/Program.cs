@@ -1,3 +1,6 @@
+using LearnApp.Server.DBContext;
+using Microsoft.EntityFrameworkCore;
+
 class Program
 {
 	public static Startup startup;
@@ -12,22 +15,25 @@ public class Startup
 {
 	private WebApplicationBuilder builder;
 	private WebApplication app;
+	public IConfiguration Configuration { get; }
 
 	public Startup(String[] argv)
 	{
 		builder = WebApplication.CreateBuilder(argv);
 		builder.Services.AddControllers();
 
-		// Add services to the container.
+		builder.Services.AddDbContext<UserContext>(options =>
+			options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 		app = builder.Build();
 		ConfigureApp();
 	}
 
 	public void ConfigureApp()
 	{
+
 		app.UseDefaultFiles();
 		app.UseStaticFiles();
-
 		// Configure the HTTP request pipeline.
 		app.UseAuthorization();
 		app.MapControllers();

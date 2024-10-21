@@ -1,0 +1,73 @@
+<div class="main-card min-w-min m-3 m-auto">
+  <p-toast />
+  <div class="grid text-center text-color-secondary" [formGroup]="lessonForm">
+    <div class="col-12 m-3 p-0 flex-initial card flex justify-content-center">
+      <input class="
+               font-bold text-3xl text-primary  border-1 border-round text-center
+               min-w-full p-5 shadow-1" pInputText type="text" placeholder="Lesson titel" formControlName="titel" />
+
+    </div>
+
+    <div class="image-container col m-3 sub-card flex align-items-center grid">
+      <div class="col-12">
+        <img class="max-w-full border-round" [src]="tempImageURL" />
+      </div>
+      <p-fileUpload class="col-12" mode="basic"
+                    name="imageURL[]"
+                    chooseIcon="pi pi-upload"
+                    url="https://www.primefaces.org/cdn/api/upload.php"
+                    accept="image/*" maxFileSize="1000000"
+                    (onUpload)="onPhotoUpload($event)"
+                    [auto]="true"
+                    chooseLabel="Browse" />
+    </div>
+
+    <div class="sub-card col m-3 text-base">
+      <p class="font-bold text-xl">
+        Subject:
+        <p-dropdown [options]="subjectsSelector" [(ngModel)]="selectedSubject" optionLabel="name"
+                    [showClear]="true" placeholder="Select" formControlName="subject" />
+      </p>
+      <p class="m-1">
+        <i class="pi pi-tag"></i>
+        Tags:
+        <p-chips formControlName="tags" [max]="5" placeholder="Select up to 5 tags" />
+      </p>
+      <p>
+        <i class="pi pi-clock"></i>
+        Duration:
+        <input pInputText class="border-1 border-round-md text-center p-1 m-1 max-w-3rem text-l"
+               type="number" value="1.5" formControlName="duration">
+        minutes
+      </p>
+      <p>
+        <i class="pi pi-money-bill"></i>
+        Price:
+        <input pInputText class="border-1 border-round-md text-center p-1 m-1 max-w-3rem text-l"
+               type="number" value="25" formControlName="price">
+        €
+      </p>
+
+      <div class="m-3 p-1 flex-grow-1">
+        <p-editor class="" formControlName="description" [style]="{ height: '320px' }" />
+      </div>
+
+      <div class="sub-card m-3 flex align-items-center justify-content-center">
+
+        <p-button class="m-3 font-bold m-3 p-2 pl-4 pr-4" (click)="onSubmit()">
+          Create Lesson
+        </p-button>
+
+        <p-avatar class="m-2" [image]="userStats.avatarURL" shape="circle" styleClass="mr-2" size="large"></p-avatar>
+        <a class="font-bold m-1 no-underline text-primary" [routerLink]="['/profile']" [queryParams]="{id: user.id}">{{ user.name.display }}</a>
+        <p class="m-1">
+          {{ userStats.rating }}
+          <i class="pi pi-star-fill text-yellow-500"></i>
+        </p>
+        <p class="m-2">
+          <i class="pi pi-envelope"></i> {{ user.mail }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

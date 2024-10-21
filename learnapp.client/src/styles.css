@@ -1,6 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
 @import "primeicons/primeicons.css";
+
 @import "primeflex/primeflex.css";
 
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+.sub-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.main-card {
+  padding: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: fit-content;
+}
+.htmlContainer * {
+    max-width: 100%;
+}

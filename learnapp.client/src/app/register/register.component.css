@@ -1,0 +1,41 @@
+/* Container for the registration form */
+.MainForm {
+  max-width: 900px;
+  margin: auto;
+}
+
+
+.p-field {
+    margin-bottom: 1vh;
+}
+  .p-field input {
+    min-width: 60%;
+    min-height: 4vh;
+    border-radius: 5px;
+    border: 1px, solid #007ad9;
+  }
+
+/* Section title styling */
+.section-title {
+  margin-bottom: 2vh;
+  font-size: 1.3rem;
+  color: #007ad9;
+}
+.emsg {
+    padding-top: 1vh;
+    max-width: 50%;
+    display: inline-block;
+}
+button {
+  min-width: 60%;
+  padding: 1vh;
+  background-color: #007ad9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1vh;
+}
+
+  button:hover {
+    background-color: #005fb3;
+  }
