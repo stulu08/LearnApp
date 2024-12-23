@@ -46,13 +46,14 @@ The app allows users to create and view lessons. To access its features, users m
 
 ---
 
-## Example Data  
 Example Data
 The app comes with example lessons and users to help you get started. Use the following credentials to log in:
 
-Email: abc@gmail.com
-Password: 123456
+- **Email:** ```abc@gmail.com```
+- **Password:** ```123456```
+
 Once logged in, you can explore the provided examples or create your own data.
+
 ---
 
 ## License  
