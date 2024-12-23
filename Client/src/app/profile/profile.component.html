@@ -1,0 +1,48 @@
+<div class="main-card m-1 p-1 grid nested-grid ">
+
+  <div class="sub-card m-3 col lg:col-6 xl:col-3 text-center flex justify-content-center">
+    <div class="gap-2 p-2">
+      <!-- Profile Picture -->
+      <div class="">
+        <img [src]="userStats.avatarURL || 'https://via.placeholder.com/150'"
+             alt="User Avatar"
+             class="w-12rem h-12rem border-round-2xl shadow-3" style="max-width: 300px;" />
+        <p class="text-base text-color mb-0">{{ user.name.first }} {{ user.name.last }}</p>
+        <p class="text-500 text-sm font-italic m-3 mt-1">{{ userStats.headline }}</p>
+      </div>
+
+      <!-- User Info (Name, Headline, Description) -->
+      <div class="max-w-max">
+        <div class="sub-card p-4 text-color">
+          <p class="text-3xl font-bold m-0">{{ user.name.display }}</p>
+          <p class="text-l">
+            {{ userStats.rating }}
+            <i class="pi pi-star-fill text-yellow-500"></i>
+            ({{ userStats.ratingCount == 0 ? "No" : userStats.ratingCount }} reviews)
+          </p>
+
+          <div class="m-3 p-1">
+            <p class="text-base max-w-max">{{ userStats.description }} </p>
+          </div>
+
+          <p class="text-500 text-sm"><i class="pi pi-envelope text-600 m-1"></i> {{ user.mail }}</p>
+          <p class="text-500 text-sm">
+            {{ user.address.postalCode }} {{ user.address.city }},
+            {{ user.address.country }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- lesson list wont work, since it cant use the same grid woth the profile card -->
+  <div class="m-3 sub-card col grid flex align-content-center justify-content-center lg:max-w-20rem" *ngFor="let item of lessons">
+    <lesson-view [lesson]="item">
+    </lesson-view>
+  </div>
+  <div class="col-12 m-3 flex align-items-start" *ngIf="canLoadMore">
+    <button pButton class="p-4 text-xl font-bold p-button-outlined" (click)="loadLessons(10)">Show More</button>
+  </div>
+
+</div>

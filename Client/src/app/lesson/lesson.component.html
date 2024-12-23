@@ -1,0 +1,49 @@
+<div class="main-card min-w-min m-3">
+  <div class="grid text-center text-color-secondary">
+    <div class="col-12 m-3 sub-card flex-initial">
+      <p class="font-bold text-3xl text-primary">{{ lesson.titel }} </p>
+    </div>
+
+    <div class="image-container col m-3 sub-card flex align-items-center justify-content-center">
+        <img class="max-w-full border-round" [src]="lessonImage" />
+    </div>
+
+    <div class="sub-card col m-3 text-base">
+      <p class="font-bold text-xl">Subject: {{ getSubjectName(lesson.lesson) }}</p>
+      <p class="tags">
+        <i class="pi pi-tag"></i>
+        Tags:
+        <span *ngFor="let tag of lesson.tags" class="tag">{{ tag }}</span>
+      </p>
+      <p>
+        <i class="pi pi-clock"></i>
+        Duration: {{ lesson.duration }} minutes
+      </p>
+      <p>
+        <i class="pi pi-money-bill"></i>
+        Price: {{ lesson.price }}€
+      </p>
+      <p>
+        <i class="pi pi-star"></i>
+        {{ lesson.rating }}
+      </p>
+
+      <div class="sub-card m-3 p-1 flex-grow-1">
+        <p class="m-1 max-w-max htmlContainer" [innerHTML]="lesson.description"></p>
+      </div>
+
+      <div class="sub-card m-3 flex align-items-center justify-content-center">
+        <p-button class="m-3 font-bold">Get Lesson for {{lesson.price}}€</p-button>
+        <p-avatar class="m-2" [image]="userStats.avatarURL" shape="circle" styleClass="mr-2" size="large"></p-avatar>
+        <a class="font-bold m-1 no-underline text-primary" [routerLink]="['/profile']" [queryParams]="{id: user.id}">{{ user.name.display }}</a>
+        <p class="m-1">
+          {{ userStats.rating }}
+          <i class="pi pi-star-fill text-yellow-500"></i>
+        </p>
+        <p class="m-2">
+          <i class="pi pi-envelope"></i> {{ user.mail }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+services:
+  client:
+    image: ${DOCKER_REGISTRY-}client
+    build:
+      context: ./Client
+      dockerfile: ./Dockerfile
+    ports:
+      - "4200:4200"
+      - "80:80"
+    environment:
+      - BACKEND_URL=http://server:8080
+      - NGINX_PORT=80
+    depends_on:
+      - server
+    networks:
+      - app-network
+  server:
+    image: ${DOCKER_REGISTRY-}server
+    build:
+      context: .
+      dockerfile: Server/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_CONNECTION_STRING=Server=db;Database=LearnApp;User Id=sa;Password=x@H@1DCXcrN$;TrustServerCertificate=true;;
+    networks:
+      - app-network
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=x@H@1DCXcrN$ 
+      - MSSQL_PID=Express
+      - MSSQL_LOG_LEVEL=Debug
+    ports:
+      - "1433:1433" 
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
