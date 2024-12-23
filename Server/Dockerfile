@@ -39,5 +39,6 @@ RUN dotnet publish "./Server.csproj" -c $BUILD_CONFIGURATION -o "/app/publish"
 # Copy to final destination
 FROM base AS final
 WORKDIR /app
+COPY ["Server/Data", "Data/"]
 COPY --from=publish "/app/publish" .
 ENTRYPOINT ["dotnet", "Server.dll"]
