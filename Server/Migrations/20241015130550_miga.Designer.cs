@@ -12,8 +12,10 @@ namespace LearnApp.Server.Migrations
 {
     [DbContext(typeof(DBContext.UserContext))]
     [Migration("20241015130550_miga")]
-    partial class miga
-    {
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
+	partial class miga
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
+	{
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
