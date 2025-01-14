@@ -56,6 +56,7 @@ internal class Startup
 
 	public void Run()
 	{
+		// close the docker instances to open ports if running inside visual studio
 		app.Run();
 	}
 
