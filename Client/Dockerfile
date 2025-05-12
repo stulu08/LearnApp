@@ -1,23 +1,15 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as base
 USER app
+# Stage 1: Build Angular app
+FROM node:20-alpine AS build
 WORKDIR /app
-EXPOSE 80
-
-# Install dependencies
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
-RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
-RUN apt-get -y install nodejs
-RUN npm install -g @angular/cli
-
-FROM with-node AS build
-WORKDIR "/app"
 COPY . .
 RUN npm install
-# RUN ng build
-ENTRYPOINT ["ng", "serve", "--host", "0.0.0.0"]
+RUN npm run build --prod
 
-# FROM nginx:latest as final
-# COPY nginx.conf /etc/nginx/nginx.conf
-# COPY --from=build /app/dist/Client/browser /usr/share/nginx/html
-
+# Stage 2: Serve with nginx
+FROM nginx:stable-alpine AS production
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist/Client/browser /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
