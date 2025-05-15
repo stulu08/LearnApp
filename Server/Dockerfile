@@ -19,7 +19,6 @@ FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR "/src"
 COPY ["Server/Server.csproj", "Server/"]
-COPY ["Client/Client.esproj", "Client/"]
 RUN dotnet restore "./Server/Server.csproj"
 COPY . .
 WORKDIR "/src/Server"
