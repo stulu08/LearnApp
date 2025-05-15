@@ -13,16 +13,48 @@ namespace LearnApp.Server.DBContext
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<User>().HasKey(u => u.id);
-			modelBuilder.Entity<User>().HasIndex(u => u.id).IsUnique();
+			modelBuilder.Entity<User>(entity =>
+			{
+				entity.HasKey(u => u.id);
+				entity.HasIndex(u => u.id).IsUnique();
+				entity.HasIndex(u => u.mail).IsUnique();
+			});
 
-			modelBuilder.Entity<User>().HasAlternateKey(u => u.id);
-			modelBuilder.Entity<User>().HasIndex(u => u.mail).IsUnique();
+			modelBuilder.Entity<UserStats>(entity =>
+			{
+				entity.HasKey(u => u.userID);
+			});
 
-			modelBuilder.Entity<UserStats>().HasKey(u => u.userID);
+			modelBuilder.Entity<Lesson>(entity =>
+			{
+				entity.HasKey(l => l.id);
+				entity.HasIndex(l => l.id).IsUnique();
+			});
 
-			modelBuilder.Entity<Lesson>().HasKey(l => l.id);
-			modelBuilder.Entity<Lesson>().HasIndex(l => l.id).IsUnique();
+			// Set default max length for all string columns if not specified
+			foreach (var entity in modelBuilder.Model.GetEntityTypes())
+			{
+				foreach (var property in entity.GetProperties())
+				{
+					if (property.ClrType == typeof(string) &&
+						property.GetMaxLength() == null &&
+						!property.IsPrimaryKey())
+					{
+						property.SetMaxLength(255);
+					}
+				}
+			}
+
+			if (Database.IsMySql())
+			{
+				modelBuilder.Entity<Lesson>().Property(e => e.description).HasColumnType("LONGTEXT");
+				modelBuilder.Entity<Lesson>().Property(e => e.tags).HasColumnType("LONGTEXT");
+			}
+			else
+			{
+				modelBuilder.Entity<Lesson>().Property(e => e.description).HasMaxLength(-1);
+				modelBuilder.Entity<Lesson>().Property(e => e.tags).HasMaxLength(100);
+			}
 
 			base.OnModelCreating(modelBuilder);
 		}

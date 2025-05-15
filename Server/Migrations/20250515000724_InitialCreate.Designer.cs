@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LearnApp.Server.Migrations
+namespace Server.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20241016181228_Lessons")]
-    partial class Lessons
+    [Migration("20250515000724_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0-rc.2.24474.1")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -34,30 +34,38 @@ namespace LearnApp.Server.Migrations
 
                     b.Property<string>("description")
                         .IsRequired()
+                        .HasMaxLength(12000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("duration")
                         .HasColumnType("int");
 
-                    b.Property<string>("imageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("lesson")
+                        .HasColumnType("int");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("rating")
                         .HasColumnType("int");
 
                     b.PrimitiveCollection<string>("tags")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("titel")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("user")
                         .HasColumnType("int");
 
                     b.HasKey("id");
+
+                    b.HasIndex("id")
+                        .IsUnique();
 
                     b.ToTable("Lessons");
                 });
@@ -72,11 +80,13 @@ namespace LearnApp.Server.Migrations
 
                     b.Property<string>("mail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("id");
 
@@ -95,13 +105,16 @@ namespace LearnApp.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("avatarURL")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("headline")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("rating")
                         .HasColumnType("int");
@@ -122,16 +135,20 @@ namespace LearnApp.Server.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("city")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.Property<string>("country")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.Property<string>("postalCode")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.Property<string>("street")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.HasKey("Userid");
 
@@ -147,13 +164,16 @@ namespace LearnApp.Server.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("display")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.Property<string>("first")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.Property<string>("last")
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
 
                             b1.HasKey("Userid");
 

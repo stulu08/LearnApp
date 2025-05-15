@@ -22,18 +22,24 @@ services:
     depends_on:
       - db
     environment:
-      - DB_CONNECTION_STRING=Server=db;Database=LearnApp;User Id=sa;Password=x@H@1DCXcrN$;TrustServerCertificate=true;;
+      #- DB_CONNECTION_STRING=Server=db;Database=LearnApp;User Id=sa;Password=x@H@1DCXcrN$;TrustServerCertificate=true;;
+      - DB_CONNECTION_STRING=Server=db;Database=LearnApp;uid=root;Password=x@H@1DCXcrN$;
+      - USE_MYSQL=1
     networks:
       - app-network
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    #mcr.microsoft.com/mssql/server:2022-latest
+    image: mysql
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=x@H@1DCXcrN$ 
       - MSSQL_PID=Express
       - MSSQL_LOG_LEVEL=Debug
+      - MYSQL_ROOT_PASSWORD=x@H@1DCXcrN$ 
+      - MYSQL_DATABASE=LearnApp 
     ports:
-      - "1433:1433" 
+      #- "1433:1433" 
+      - "3306:3306" 
     networks:
       - app-network
 
